@@ -1,5 +1,5 @@
-const Project = require("../models/Project");
-const Task = require("../models/Task");
+const Project = require("../models/project");
+const Task = require("../models/task");
 
 exports.getStats = async (req, res) => {
   try {
