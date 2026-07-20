@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+import Login from "./pages/login";
+import Dashboard from "./pages/dashboard";
 import ProjectDetail from "./pages/projectDetail";
 
 function App() {
