@@ -12,9 +12,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import api from "../utils/api";
-import Navbar from "../components/Navbar";
-import MetricCard from "../components/MetricCard";
-import ChatWidget from "../components/ChatWidget";
+import Navbar from "../components/navbar";
+import MetricCard from "../components/metricCard";
+import ChatWidget from "../components/chatWidget";
 
 const Dashboard = () => {
   const [stats, setStats] = useState(null);

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
-import Navbar from "../components/Navbar";
-import TaskModal from "../components/TaskModal";
-import ChatWidget from "../components/ChatWidget";
+import Navbar from "../components/navbar";
+import TaskModal from "../components/taskModal";
+import ChatWidget from "../components/chatWidget";
 
 const STATUS_CYCLE = {
   todo: "in-progress",
