@@ -37,15 +37,18 @@ const ChatWidget = () => {
         { role: "assistant", text: res.data.reply },
       ]);
     } catch (err) {
+      const isRateLimit =
+        err.response?.status === 429 ||
+        err.response?.data?.error?.includes("quota");
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          text: "Sorry, I couldn't process that. Please try again.",
+          text: isRateLimit
+            ? "I'm getting a lot of requests right now — give me a few seconds and try again."
+            : "Sorry, I couldn't process that. Please try again.",
         },
       ]);
-    } finally {
-      setLoading(false);
     }
   };
 
