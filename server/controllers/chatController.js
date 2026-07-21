@@ -57,7 +57,7 @@ ${projectSummaries || "No projects yet"}
 `.trim();
 
     // FIXED: Changed to valid model name "gemini-1.5-flash"
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
 
     const prompt = `You are a helpful productivity assistant for a task management app called TaskFlow AI. Answer the user's question using ONLY the data provided below. Be concise and specific — reference actual task/project names and numbers. Do not make up data not shown here.
 
