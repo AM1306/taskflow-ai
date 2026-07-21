@@ -29,8 +29,9 @@ exports.chat = async (req, res) => {
 
     const projectSummaries = projects
       .map((p) => {
+        // Safe check for t.project existence
         const pTasks = tasks.filter(
-          (t) => t.project._id.toString() === p._id.toString(),
+          (t) => t.project && t.project._id.toString() === p._id.toString(),
         );
         const pending = pTasks.filter((t) => t.status !== "done").length;
         return `- "${p.title}": ${pTasks.length} tasks total, ${pending} pending`;
@@ -41,7 +42,7 @@ exports.chat = async (req, res) => {
       overdueTasks
         .map(
           (t) =>
-            `- "${t.title}" (project: ${t.project.title}, due: ${new Date(t.dueDate).toLocaleDateString()})`,
+            `- "${t.title}" (project: ${t.project?.title || "Unassigned"}, due: ${new Date(t.dueDate).toLocaleDateString()})`,
         )
         .join("\n") || "None";
 
@@ -54,7 +55,9 @@ ${overdueList}
 Projects:
 ${projectSummaries || "No projects yet"}
 `.trim();
-    const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+
+    // FIXED: Changed to valid model name "gemini-1.5-flash"
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `You are a helpful productivity assistant for a task management app called TaskFlow AI. Answer the user's question using ONLY the data provided below. Be concise and specific — reference actual task/project names and numbers. Do not make up data not shown here.
 
@@ -68,6 +71,8 @@ USER QUESTION: ${message}`;
 
     res.json({ reply });
   } catch (err) {
+    // ALWAYS print to console so errors show in Render logs!
+    console.error("🔴 CHAT ERROR:", err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
